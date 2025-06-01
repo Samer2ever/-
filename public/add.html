@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إضافة إعلان</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>إضافة إعلان جديد</h1>
+  </header>
+  <main>
+    <form>
+      <label>اسم الدباب:</label><br>
+      <input type="text" name="title"><br><br>
+      <label>السعر:</label><br>
+      <input type="text" name="price"><br><br>
+      <label>الوصف:</label><br>
+      <textarea name="description"></textarea><br><br>
+      <label>رابط الصورة:</label><br>
+      <input type="text" name="image"><br><br>
+      <button type="submit">نشر الإعلان</button>
+    </form>
+  </main>
+  <script>
+document.querySelector("form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const data = {
+    title: this.title.value,
+    price: this.price.value,
+    description: this.description.value,
+    image: this.image.value
+  };
+
+  fetch("https://your-backend-url.com/ads", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(msg => {
+    alert("تم نشر الإعلان");
+    window.location.href = "index.html";
+  });
+});
+  </script>
+</body>
+</html>
